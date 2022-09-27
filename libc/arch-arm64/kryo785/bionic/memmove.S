@@ -1,6 +1,5 @@
 /* Copyright (c) 2013, Linaro Limited
    All rights reserved.
-
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are met:
        * Redistributions of source code must retain the above copyright
@@ -11,7 +10,6 @@
        * Neither the name of the Linaro nor the
          names of its contributors may be used to endorse or promote products
          derived from this software without specific prior written permission.
-
    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
    "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -84,10 +82,10 @@
 */
 
 #if defined(WMEMMOVE)
-ENTRY(wmemmove)
+ENTRY(wmemmove_opt)
 	lsl	count, count, #2
 #else
-ENTRY(memmove_generic)
+ENTRY(memmove_opt)
 #endif
 	sub	tmp1, dstin, src
 	cmp	count, 96
@@ -147,11 +145,10 @@ ENTRY(memmove_generic)
 3:	ret
 
 #if defined(WMEMMOVE)
-END(wmemmove)
+END(wmemmove_opt)
 #else
-END(memmove_generic)
+END(memmove_opt)
 
-ALIAS_SYMBOL(memcpy_generic, memmove_generic)
 #endif
 
 NOTE_GNU_PROPERTY()
